@@ -9,4 +9,7 @@ export class AuthController {
     login() {
         return this.authService.login()
     }
+    signup() {
+        return this.authService.signup()
+    }
 }
