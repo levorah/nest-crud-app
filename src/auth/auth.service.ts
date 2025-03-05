@@ -39,6 +39,11 @@ export class AuthService {
         const user = await this.prisma.user.findUnique({
             where: {
                 email: dto.email
+            },
+            select: {
+                email: true,
+                id: true,
+                hash: true,
             }
         })
 
@@ -48,10 +53,12 @@ export class AuthService {
                 'Credentials incorrect'
             )
 
-
         // compare password 
         const pwMatches = await argon.verify(user.hash, dto.password)
         // if password incorrect throw exception
+        if (user.hash) {
+            user.hash = 'hello'
+        }
         if (!pwMatches)
             throw new ForbiddenException(
                 'Credentials incorrect'
