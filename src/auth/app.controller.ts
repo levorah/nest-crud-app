@@ -4,15 +4,15 @@ import { AuthDto } from "./dto";
 
 @Controller('auth')
 export class AuthController {
-    constructor(private authService: AuthService) {}
+    constructor(private authService: AuthService) { }
+
     @Post('login')
-    login(@Body() dto:AuthDto) {
-        console.log({
-            dto,
-        });
+    login(@Body() dto: AuthDto) {
+        console.log(dto,'dto is here')
         return this.authService.login()
     }
-    signup() {
+    @Post('signup')
+    signup(@Body() dto:AuthDto) {
         return this.authService.signup()
     }
 }
